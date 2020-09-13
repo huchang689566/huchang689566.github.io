@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>多线程中wait 和sleep的区别</title>
+      <link href="2020/09/13/sleep/"/>
+      <url>2020/09/13/sleep/</url>
+      
+        <content type="html"><![CDATA[<h1 id="多线程中wait-和sleep的区别"><a href="#多线程中wait-和sleep的区别" class="headerlink" title="多线程中wait 和sleep的区别"></a>多线程中wait 和sleep的区别</h1><h2 id="wait-和sleep的基本使用："><a href="#wait-和sleep的基本使用：" class="headerlink" title="wait 和sleep的基本使用："></a>wait 和sleep的基本使用：</h2><p>​        wait：objects，锁对象调用，锁对象可以是任意对象，也可以单独创建一个锁对象。</p><p>​         sleep：Thead类的静态方法。</p><h3 id="使用条件："><a href="#使用条件：" class="headerlink" title="使用条件："></a>使用条件：</h3><p>​        wait ：使用依赖于锁对象，锁对象又是出现在同步方法/代码块中，所以wait方法也必须是在同步中出现。</p><p>​        sleep：可以出现在任意位置。</p><p><img src="/.io//blog\source_posts\sleep\1.png"></p><p>sleep：会释放cpu资源，但是不会释放锁，当休眠时间结束之后，被休眠线程进入就绪状态和其他线程竞争CPU执行权。</p><p>当sleep出现在同步代码块中，虽然当前线程让出了cpu的执行权，但是由于没有释放锁资源，其他线程即使获得CPU的执行权但是没办法获得锁资源，所以没办法进入同步块中 ，线程得不到被锁住的资源会放弃cpu使用权，进入线程阻塞，等待锁资源被释放。如果获得锁资源之后线程会进入就绪状态。</p><p><img src="/.io//blog\source_posts\sleep\2.png"></p><p>wait：会释放cpu资源和锁资源，进入等待池中，其他线程获得cpu执行权和锁资源，能进入到同步块中执行。需要在另一个线程中手动唤醒，唤醒后由等待池进入锁池。</p><p>不带参：立马让出资源。</p><p>带参：再执行当前设置时间后，让出资源。</p><h3 id="wait线程唤醒："><a href="#wait线程唤醒：" class="headerlink" title="wait线程唤醒："></a>wait线程唤醒：</h3><p>唤醒等待线程，并不是立刻去执行被唤醒的线程，被唤醒的线程只是就绪状态，需要当前线程执行完释放CPU资源之后之后，就绪状态线程再去竞争获得CPU执行权。</p><p><img src="/.io//blog\source_posts\sleep\3.png"></p><p><img src="/.io//blog\source_posts\sleep\4.png"></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 多线程 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="2020/09/11/hellonullworld/"/>
       <url>2020/09/11/hellonullworld/</url>
